@@ -12,6 +12,7 @@ import {
 } from '@material-tailwind/react';
 import { XMarkIcon } from '@heroicons/react/24/solid';
 import useStore from '@/lib/store';
+import { calculateDaysLeft } from '@/lib/utils';
 
 export default function ModalC({
   children,
@@ -22,8 +23,6 @@ export default function ModalC({
   editMode?: boolean;
   data?: Object;
 }) {
-  console.log('🛑 ~ data:', data);
-
   const [open, setOpen] = React.useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const { addMemberData, updateMemberData } = useStore();
@@ -37,7 +36,7 @@ export default function ModalC({
         email: form.email.value,
         img: form.img.value,
         position: form.position.value,
-        dayLeft: form.dayLeft.value,
+        dayLeft: calculateDaysLeft(form.dayLeft.value),
         school: form.school.value,
         location: form.location.value,
       });
@@ -47,7 +46,7 @@ export default function ModalC({
         email: form.email.value,
         img: form.img.value,
         position: form.position.value,
-        dayLeft: form.dayLeft.value,
+        dayLeft: calculateDaysLeft(form.dayLeft.value),
         school: form.school.value,
         location: form.location.value,
       });
@@ -95,8 +94,8 @@ export default function ModalC({
             <Input
               defaultValue={data?.dayLeft}
               name='dayLeft'
-              label='Day Left'
-              type='number'
+              label='Deadline'
+              type='date'
             />
             <Input
               defaultValue={data?.location}

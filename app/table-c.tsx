@@ -21,21 +21,6 @@ import {
 import ModalC from './modal-c';
 import useStore from '@/lib/store';
 
-const TABS = [
-  {
-    label: 'All',
-    value: 'all',
-  },
-  {
-    label: 'Monitored',
-    value: 'monitored',
-  },
-  {
-    label: 'Unmonitored',
-    value: 'unmonitored',
-  },
-];
-
 export default function TableC() {
   const { memberData } = useStore();
   const TABLE_HEAD = [
@@ -60,9 +45,9 @@ export default function TableC() {
             </Typography>
           </div>
           <div className='flex flex-col gap-2 shrink-0 sm:flex-row'>
-            <Button variant='outlined' color='blue-gray' size='sm'>
+            {/* <Button variant='outlined' color='blue-gray' size='sm'>
               view all
-            </Button>
+            </Button> */}
             <ModalC>
               <Button
                 className='flex items-center gap-3'
@@ -72,23 +57,6 @@ export default function TableC() {
                 <UserPlusIcon strokeWidth={2} className='w-4 h-4' /> Add member
               </Button>
             </ModalC>
-          </div>
-        </div>
-        <div className='flex flex-col items-center justify-between gap-4 md:flex-row'>
-          <Tabs value='all' className='w-full md:w-max'>
-            <TabsHeader>
-              {TABS.map(({ label, value }) => (
-                <Tab key={value} value={value}>
-                  &nbsp;&nbsp;{label}&nbsp;&nbsp;
-                </Tab>
-              ))}
-            </TabsHeader>
-          </Tabs>
-          <div className='w-full md:w-72'>
-            <Input
-              label='Search'
-              icon={<MagnifyingGlassIcon className='w-5 h-5' />}
-            />
           </div>
         </div>
       </CardHeader>
