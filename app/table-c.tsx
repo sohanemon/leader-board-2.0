@@ -188,9 +188,22 @@ export default function TableC() {
                     </td>
                     <td className={classes}>
                       <Tooltip content='Edit User'>
-                        <IconButton variant='text' color='blue-gray'>
-                          <PencilIcon className='w-4 h-4' />
-                        </IconButton>
+                        <ModalC
+                          editMode
+                          data={{
+                            img,
+                            name,
+                            email,
+                            position,
+                            location,
+                            dayLeft,
+                            school,
+                          }}
+                        >
+                          <IconButton variant='text' color='blue-gray'>
+                            <PencilIcon className='w-4 h-4' />
+                          </IconButton>
+                        </ModalC>
                       </Tooltip>
                     </td>
                   </tr>

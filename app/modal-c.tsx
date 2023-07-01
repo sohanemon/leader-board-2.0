@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client';
 import React, { useRef } from 'react';
 import {
@@ -12,7 +13,17 @@ import {
 import { XMarkIcon } from '@heroicons/react/24/solid';
 import useStore from '@/lib/store';
 
-export default function ModalC({ children }: { children: React.ReactNode }) {
+export default function ModalC({
+  children,
+  editMode,
+  data,
+}: {
+  children: React.ReactNode;
+  editMode?: boolean;
+  data?: Object;
+}) {
+  console.log('🛑 ~ data:', data);
+
   const [open, setOpen] = React.useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const { addMemberData } = useStore();
@@ -23,6 +34,7 @@ export default function ModalC({ children }: { children: React.ReactNode }) {
     addMemberData({
       name: form.name.value,
       email: form.email.value,
+      img: form.img.value,
       position: form.position.value,
       dayLeft: form.dayLeft.value,
       school: form.school.value,
@@ -40,19 +52,53 @@ export default function ModalC({ children }: { children: React.ReactNode }) {
           <XMarkIcon className='w-5 h-5 mr-3' onClick={handleOpen} />
         </div>
         <DialogBody divider>
-          <form ref={formRef} className='grid grid-cols-2 gap-6'>
-            <Input name='name' label='Name' type='text' />
-            <Input name='email' label='Email' type='email' />
+          <form
+            ref={formRef}
+            className='grid grid-cols-2 gap-6 [&>div:has(.full)]:col-span-2'
+          >
             <Input
+              defaultValue={data?.name}
+              name='name'
+              label='Name'
+              type='text'
+            />
+            <Input
+              defaultValue={data?.email}
+              name='email'
+              label='Email'
+              type='email'
+            />
+            <Input
+              defaultValue={data?.img}
               name='img'
-              className='col-span-full'
+              className='full'
               label='Photo URL'
               type='text'
             />
-            <Input name='position' label='Position' type='number' />
-            <Input name='dayLeft' label='Day Left' type='number' />
-            <Input name='location' label='Location' type='text' />
-            <Input name='school' label='School' type='text' />
+            <Input
+              defaultValue={data?.position}
+              name='position'
+              label='Position'
+              type='number'
+            />
+            <Input
+              defaultValue={data?.dayLeft}
+              name='dayLeft'
+              label='Day Left'
+              type='number'
+            />
+            <Input
+              defaultValue={data?.location}
+              name='location'
+              label='Location'
+              type='text'
+            />
+            <Input
+              defaultValue={data?.school}
+              name='school'
+              label='School'
+              type='text'
+            />
           </form>
         </DialogBody>
         <DialogFooter className='space-x-2'>
