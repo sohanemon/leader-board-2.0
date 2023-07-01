@@ -9,6 +9,7 @@ import {
   signOut,
   updateProfile,
 } from 'firebase/auth';
+import useStore from './store';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_apiKey,
@@ -29,6 +30,7 @@ export function getCurrentUser() {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       console.log('🛑 ~ onAuthStateChanged ~ user:', user);
+      useStore.getState().setUser(user);
     } else {
       // User is signed out
     }
