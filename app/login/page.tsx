@@ -1,6 +1,6 @@
 'use client';
 import Btn from '@/components/ui/btn';
-import { googleLogin } from '@/lib/firebase';
+import { createUser, googleLogin, signIn } from '@/lib/firebase';
 import { Input } from '@material-tailwind/react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
@@ -12,7 +12,10 @@ export default function Page() {
   const signUp = searchParams.get('signup');
 
   function handleSubmit() {
-    // signUp ? createUser(name, email, password) : signIn(email, password);
+    const form: any = formRef.current;
+    signUp
+      ? createUser(form?.name.value, form.email.value, form?.password.value)
+      : signIn(form.email.value, form?.password.value);
   }
 
   return (
@@ -28,11 +31,16 @@ export default function Page() {
         {!signUp ? (
           <p className='text-sm text-center'>
             Do not have an account?{' '}
-            <Link href={'?signup=true'}>Create one</Link>
+            <Link href={'?signup=true'} className='text-blue-600'>
+              Create one
+            </Link>
           </p>
         ) : (
           <p className='text-sm text-center'>
-            Already have an account? <Link href={'/login'}>Login</Link>
+            Already have an account?{' '}
+            <Link href={'/login'} className='text-blue-600'>
+              Login
+            </Link>
           </p>
         )}
         <Btn onClick={() => googleLogin()}>Login with Google</Btn>
