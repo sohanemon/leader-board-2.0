@@ -26,20 +26,31 @@ export default function ModalC({
 
   const [open, setOpen] = React.useState(false);
   const formRef = useRef<HTMLFormElement>(null);
-  const { addMemberData } = useStore();
+  const { addMemberData, updateMemberData } = useStore();
 
   const handleOpen = () => setOpen(!open);
   function handleSubmit() {
     const form: any = formRef.current;
-    addMemberData({
-      name: form.name.value,
-      email: form.email.value,
-      img: form.img.value,
-      position: form.position.value,
-      dayLeft: form.dayLeft.value,
-      school: form.school.value,
-      location: form.location.value,
-    });
+    if (editMode) {
+      updateMemberData({
+        name: form.name.value,
+        email: form.email.value,
+        img: form.img.value,
+        position: form.position.value,
+        dayLeft: form.dayLeft.value,
+        school: form.school.value,
+        location: form.location.value,
+      });
+    } else
+      addMemberData({
+        name: form.name.value,
+        email: form.email.value,
+        img: form.img.value,
+        position: form.position.value,
+        dayLeft: form.dayLeft.value,
+        school: form.school.value,
+        location: form.location.value,
+      });
     handleOpen();
   }
 
@@ -106,7 +117,7 @@ export default function ModalC({
             close
           </Button>
           <Button variant='gradient' color='green' onClick={handleSubmit}>
-            Add Member
+            {editMode ? 'Update' : ' Add Member'}
           </Button>
         </DialogFooter>
       </Dialog>
