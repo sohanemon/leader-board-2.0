@@ -26,12 +26,15 @@ const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
 
+// Utils
+const goHome = () => (window.location.pathname = '/');
+
 // Functions
 export function getCurrentUser() {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       console.log('🛑 ~ onAuthStateChanged ~ user:', user);
-      useStore.getState().setUser(user as User);
+      useStore.getState().setUser(user);
     } else {
       // User is signed out
     }
@@ -42,7 +45,8 @@ export function googleLogin() {
   signInWithPopup(auth, provider)
     .then((result) => {
       const user = result.user;
-      console.log('🛑 ~ .then ~ user:', user);
+      useStore.getState().setUser(user);
+      goHome();
     })
     .catch((error) => {
       const errorMessage = error.message;
@@ -60,6 +64,7 @@ export function createUser(name: string, email: string, password: string) {
       })
         .then(() => {
           console.log(user);
+          goHome();
         })
         .catch((error) => {
           const errorMessage = error.message;
@@ -76,6 +81,7 @@ export function signIn(email: string, password: string) {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
+      goHome();
     })
     .catch((error) => {
       const errorMessage = error.message;
@@ -86,7 +92,7 @@ export function signIn(email: string, password: string) {
 export function logOut() {
   signOut(auth)
     .then(() => {
-      console.log('Logged Out');
+      useStore.getState().setUser(null);
     })
     .catch((error) => {
       const errorMessage = error.message;

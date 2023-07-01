@@ -20,6 +20,8 @@ import {
 } from '@material-tailwind/react';
 import React from 'react';
 
+import { logOut } from '@/lib/firebase';
+import Link from 'next/link';
 // profile menu component
 const profileMenuItems = [
   {
@@ -33,31 +35,44 @@ function ProfileMenu() {
   const user = useStore((s) => s.user);
   console.log('🛑 ~ ProfileMenu ~ user:', user);
 
-  const closeMenu = () => setIsMenuOpen(false);
+  const closeMenu = () => {
+    logOut();
+    setIsMenuOpen(false);
+  };
 
   return (
-    <Menu open={isMenuOpen} handler={setIsMenuOpen} placement='bottom-end'>
+    <Menu
+      open={isMenuOpen}
+      handler={user?.uid && setIsMenuOpen}
+      placement='bottom-end'
+    >
       <MenuHandler>
-        <Button
-          variant='text'
-          color='blue-gray'
-          className='flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto'
-        >
-          <Avatar
-            variant='circular'
-            size='sm'
-            alt='candice wu'
-            className='  p-0.5'
-            src='https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80'
-          />
-          <p>{user?.displayName}</p>
-          <ChevronDownIcon
-            strokeWidth={2.5}
-            className={`h-3 w-3 transition-transform ${
-              isMenuOpen ? 'rotate-180' : ''
-            }`}
-          />
-        </Button>
+        {user?.uid ? (
+          <Button
+            variant='text'
+            color='blue-gray'
+            className='flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto'
+          >
+            <Avatar
+              variant='circular'
+              size='sm'
+              alt='candice wu'
+              className='  p-0.5'
+              src='https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80'
+            />
+            <p>{user?.displayName}</p>
+            <ChevronDownIcon
+              strokeWidth={2.5}
+              className={`h-3 w-3 transition-transform ${
+                isMenuOpen ? 'rotate-180' : ''
+              }`}
+            />
+          </Button>
+        ) : (
+          <Link href={'/login'} className='ml-auto'>
+            <Button className='rounded-full'>Login</Button>
+          </Link>
+        )}
       </MenuHandler>
       <MenuList className='p-1'>
         {profileMenuItems.map(({ label, icon }, key) => {
@@ -96,13 +111,9 @@ export default function NavbarUi() {
   return (
     <Navbar className='max-w-screen-xl p-2 mx-auto mt-2 lg:rounded-full lg:pl-6'>
       <div className='relative flex items-center mx-auto text-blue-gray-900'>
-        <Typography
-          as='a'
-          href='#'
-          className='mr-4 ml-2 cursor-pointer py-1.5 font-medium'
-        >
+        <Link href='/' className='mr-4 ml-2 cursor-pointer py-1.5 font-medium'>
           Leader Board
-        </Typography>
+        </Link>
 
         <IconButton
           size='sm'

@@ -2,7 +2,7 @@
 import Btn from '@/components/ui/btn';
 import { useSearchParams } from 'next/navigation';
 import { Input, Typography } from '@material-tailwind/react';
-import { createUser } from '@/lib/firebase';
+import { createUser, googleLogin } from '@/lib/firebase';
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -22,6 +22,7 @@ export default function Page() {
         <Input size='lg' type='email' label='Email' />
         <Input size='lg' type='password' label='Password' />
         <Btn onClick={handleSubmit}> {signUp ? 'Sign Up' : 'Sign In'}</Btn>
+        <Btn onClick={() => googleLogin()}>Login with Google</Btn>
       </form>
     </section>
   );
