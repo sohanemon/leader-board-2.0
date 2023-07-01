@@ -34,14 +34,14 @@ const TABS = [
   },
 ];
 
-const TABLE_HEAD = ['Position', 'Name', 'Day Left', 'Location', 'School'];
+const TABLE_HEAD = ['Position', 'Name', 'Day Left', 'Location', 'School', ''];
 
 const TABLE_ROWS = [
   {
     img: 'https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg',
     name: 'Emon',
     email: 'emon@nobody.com',
-    position: 'Manager',
+    position: 1,
     location: 'Dhaka',
     dayLeft: 23,
     school: 'Dhaka High School',
@@ -182,7 +182,6 @@ export default function TableC() {
                         </Typography>
                       </div>
                     </td>
-
                     <td className={classes}>
                       <Tooltip content='Edit User'>
                         <IconButton variant='text' color='blue-gray'>
