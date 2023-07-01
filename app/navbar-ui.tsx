@@ -110,19 +110,11 @@ function ProfileMenu() {
 export default function NavbarUi() {
   return (
     <Navbar className='max-w-screen-xl p-2 mx-auto mt-2 lg:rounded-full lg:pl-6'>
-      <div className='relative flex items-center mx-auto text-blue-gray-900'>
+      <div className='relative flex items-center justify-between mx-auto text-blue-gray-900'>
         <Link href='/' className='mr-4 ml-2 cursor-pointer py-1.5 font-medium'>
           Leader Board
         </Link>
 
-        <IconButton
-          size='sm'
-          color='blue-gray'
-          variant='text'
-          className='ml-auto mr-2 lg:hidden'
-        >
-          <Bars2Icon className='w-6 h-6' />
-        </IconButton>
         <ProfileMenu />
       </div>
     </Navbar>
