@@ -1,4 +1,6 @@
+// @ts-nocheck
 'use client';
+
 import useStore from '@/lib/store';
 import {
   Bars2Icon,

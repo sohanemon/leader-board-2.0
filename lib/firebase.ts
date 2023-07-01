@@ -5,6 +5,7 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   signInWithPopup,
+  User,
   onAuthStateChanged,
   signOut,
   updateProfile,
@@ -30,7 +31,7 @@ export function getCurrentUser() {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       console.log('🛑 ~ onAuthStateChanged ~ user:', user);
-      useStore.getState().setUser(user);
+      useStore.getState().setUser(user as User);
     } else {
       // User is signed out
     }
