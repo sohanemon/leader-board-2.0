@@ -1,5 +1,5 @@
+// @ts-nocheck
 'use client';
-
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { PencilIcon, UserPlusIcon } from '@heroicons/react/24/solid';
 import {
@@ -18,6 +18,8 @@ import {
   Tooltip,
   Typography,
 } from '@material-tailwind/react';
+import ModalC from './modal-c';
+import useStore from '@/lib/store';
 
 const TABS = [
   {
@@ -34,21 +36,17 @@ const TABS = [
   },
 ];
 
-const TABLE_HEAD = ['Position', 'Name', 'Day Left', 'Location', 'School', ''];
-
-const TABLE_ROWS = [
-  {
-    img: 'https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg',
-    name: 'Emon',
-    email: 'emon@nobody.com',
-    position: 1,
-    location: 'Dhaka',
-    dayLeft: 23,
-    school: 'Dhaka High School',
-  },
-];
-
 export default function TableC() {
+  const { memberData } = useStore();
+  const TABLE_HEAD = [
+    'Position',
+    'Name',
+    'Day Left',
+    'Location',
+    'School',
+    'Edit',
+  ];
+  const TABLE_ROWS = memberData;
   return (
     <Card className='w-full h-full mt-10 shadow-none box'>
       <CardHeader floated={false} className='rounded-none shadow-none'>
@@ -65,9 +63,15 @@ export default function TableC() {
             <Button variant='outlined' color='blue-gray' size='sm'>
               view all
             </Button>
-            <Button className='flex items-center gap-3' color='blue' size='sm'>
-              <UserPlusIcon strokeWidth={2} className='w-4 h-4' /> Add member
-            </Button>
+            <ModalC>
+              <Button
+                className='flex items-center gap-3'
+                color='blue'
+                size='sm'
+              >
+                <UserPlusIcon strokeWidth={2} className='w-4 h-4' /> Add member
+              </Button>
+            </ModalC>
           </div>
         </div>
         <div className='flex flex-col items-center justify-between gap-4 md:flex-row'>
