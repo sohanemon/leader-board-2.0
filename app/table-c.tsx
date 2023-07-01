@@ -41,10 +41,10 @@ const TABLE_ROWS = [
     img: 'https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg',
     name: 'Emon',
     email: 'emon@nobody.com',
-    job: 'Manager',
-    org: 'Organization',
-    online: true,
-    date: '23/04/18',
+    position: 'Manager',
+    location: 'Dhaka',
+    dayLeft: 23,
+    school: 'Dhaka High School',
   },
 ];
 
@@ -110,7 +110,10 @@ export default function TableC() {
           </thead>
           <tbody>
             {TABLE_ROWS.map(
-              ({ img, name, email, job, org, online, date }, index) => {
+              (
+                { img, name, email, position, location, dayLeft, school },
+                index
+              ) => {
                 const isLast = index === TABLE_ROWS.length - 1;
                 const classes = isLast
                   ? 'p-4'
@@ -118,6 +121,15 @@ export default function TableC() {
 
                 return (
                   <tr key={name}>
+                    <td className={classes}>
+                      <Typography
+                        variant='small'
+                        color='blue-gray'
+                        className='font-normal opacity-70'
+                      >
+                        {position}
+                      </Typography>
+                    </td>
                     <td className={classes}>
                       <div className='flex items-center gap-3'>
                         <Avatar src={img} alt={name} size='sm' />
@@ -146,25 +158,8 @@ export default function TableC() {
                           color='blue-gray'
                           className='font-normal'
                         >
-                          {job}
+                          {dayLeft}
                         </Typography>
-                        <Typography
-                          variant='small'
-                          color='blue-gray'
-                          className='font-normal opacity-70'
-                        >
-                          {org}
-                        </Typography>
-                      </div>
-                    </td>
-                    <td className={classes}>
-                      <div className='w-max'>
-                        <Chip
-                          variant='ghost'
-                          size='sm'
-                          value={online ? 'online' : 'offline'}
-                          color={online ? 'green' : 'blue-gray'}
-                        />
                       </div>
                     </td>
                     <td className={classes}>
@@ -173,9 +168,21 @@ export default function TableC() {
                         color='blue-gray'
                         className='font-normal'
                       >
-                        {date}
+                        {location}
                       </Typography>
                     </td>
+                    <td className={classes}>
+                      <div className='w-max'>
+                        <Typography
+                          variant='small'
+                          color='blue-gray'
+                          className='font-normal'
+                        >
+                          {school}
+                        </Typography>
+                      </div>
+                    </td>
+
                     <td className={classes}>
                       <Tooltip content='Edit User'>
                         <IconButton variant='text' color='blue-gray'>
