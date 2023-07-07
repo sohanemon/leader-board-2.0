@@ -29,7 +29,6 @@ export default function TableC() {
     'Day Left',
     'Location',
     'School',
-    'Edit',
   ];
   const TABLE_ROWS = memberData.sort((a, b) => a.dayLeft - b.dayLeft);
   return (
@@ -153,26 +152,6 @@ export default function TableC() {
                           {school}
                         </Typography>
                       </div>
-                    </td>
-                    <td className={classes}>
-                      <Tooltip content='Edit User'>
-                        <ModalC
-                          editMode
-                          data={{
-                            img,
-                            name,
-                            email,
-                            position,
-                            location,
-                            dayLeft,
-                            school,
-                          }}
-                        >
-                          <IconButton variant='text' color='blue-gray'>
-                            <PencilIcon className='w-4 h-4' />
-                          </IconButton>
-                        </ModalC>
-                      </Tooltip>
                     </td>
                   </tr>
                 );

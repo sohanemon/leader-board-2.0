@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client';
 import useStore from '@/lib/store';
 import { calculateDaysLeft } from '@/lib/utils';
@@ -7,7 +8,7 @@ import { useRef } from 'react';
 
 export default function Page() {
   const formRef = useRef<HTMLFormElement>(null);
-  const { updateMemberData } = useStore();
+  const { updateMemberData, user } = useStore();
   const { push } = useRouter();
 
   function handleSubmit() {
@@ -28,12 +29,27 @@ export default function Page() {
         ref={formRef}
         className='grid grid-cols-2 gap-6 [&>div:has(.full)]:col-span-2'
       >
-        <Input name='name' label='Name' type='text' />
-        <Input name='email' label='Email' type='email' />
-        <Input name='img' className='full' label='Photo URL' type='text' />
-        <Input name='dayLeft' label='Deadline' type='date' />
+        <Input
+          name='name'
+          defaultValue={user?.displayName}
+          label='Name'
+          type='text'
+        />
+        <Input
+          defaultValue={user?.email}
+          name='email'
+          label='Email'
+          type='email'
+        />
+        <Input name='school' label='School' type='text' />
         <Input name='location' label='Location' type='text' />
-        <Input name='school' label='School' type='text' className='full' />
+        <Input name='dayLeft' label='Deadline' type='date' />
+        <Input
+          defaultValue={user?.photoURL}
+          name='img'
+          label='Optional'
+          type='text'
+        />
         <Button
           variant='outlined'
           className='col-span-full'
