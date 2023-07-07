@@ -1,6 +1,7 @@
 'use client';
 import Btn from '@/components/ui/btn';
 import { createUser, googleLogin, signIn } from '@/lib/firebase';
+import useStore from '@/lib/store';
 import { Input } from '@material-tailwind/react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
@@ -8,6 +9,7 @@ import { useRef } from 'react';
 
 export default function Page() {
   const searchParams = useSearchParams();
+  const { promptDescription } = useStore();
   const formRef = useRef<HTMLFormElement>(null);
   const signUp = searchParams.get('signup');
 

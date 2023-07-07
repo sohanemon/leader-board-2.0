@@ -86,12 +86,6 @@ export default function ModalC({
               type='text'
             />
             <Input
-              defaultValue={data?.position}
-              name='position'
-              label='Position'
-              type='number'
-            />
-            <Input
               defaultValue={data?.dayLeft}
               name='dayLeft'
               label='Deadline'
@@ -108,6 +102,7 @@ export default function ModalC({
               name='school'
               label='School'
               type='text'
+              className='full'
             />
           </form>
         </DialogBody>

@@ -18,7 +18,7 @@ import {
   Navbar,
   Typography,
 } from '@material-tailwind/react';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { logOut } from '@/lib/firebase';
 import Link from 'next/link';
@@ -108,6 +108,11 @@ function ProfileMenu() {
 }
 
 export default function NavbarUi() {
+  const { preFetch } = useStore();
+  useEffect(() => {
+    preFetch();
+  }, [preFetch]);
+
   return (
     <Navbar className='max-w-screen-xl p-2 mx-auto mt-2 lg:rounded-full lg:pl-6'>
       <div className='relative flex items-center justify-between mx-auto text-blue-gray-900'>
