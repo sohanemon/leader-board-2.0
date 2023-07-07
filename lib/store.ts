@@ -14,6 +14,7 @@ interface StoreType {
 const useStore = create<StoreType>()((set) => ({
   user: null,
   promptDescription: false,
+
   setPromptDescription(opt) {
     set(() => ({ promptDescription: opt }));
   },

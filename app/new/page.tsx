@@ -41,13 +41,19 @@ export default function Page() {
           label='Email'
           type='email'
         />
-        <Input name='school' label='School' type='text' />
-        <Input name='location' label='Location' type='text' />
-        <Input name='dayLeft' label='Deadline' type='date' />
+        <Input name='dayLeft' label='Opt deadline' type='date' />
+        <Input name='location' label='Location (Optional)' type='text' />
+        <Input
+          name='school'
+          label='School (Optional)'
+          type='text'
+          className='full'
+        />
         <Input
           defaultValue={user?.photoURL}
           name='img'
-          label='Optional'
+          className='full'
+          label='Photo URL (Optional)'
           type='text'
         />
         <Button

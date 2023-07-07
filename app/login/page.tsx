@@ -9,7 +9,7 @@ import { useRef } from 'react';
 
 export default function Page() {
   const searchParams = useSearchParams();
-  const { promptDescription } = useStore();
+  const { firebaseErr } = useStore();
   const formRef = useRef<HTMLFormElement>(null);
   const signUp = searchParams.get('signup');
 
@@ -29,6 +29,8 @@ export default function Page() {
         {signUp && <Input name='name' size='lg' type='name' label='Name' />}
         <Input name='email' size='lg' type='email' label='Email' />
         <Input name='password' size='lg' type='password' label='Password' />
+
+        {firebaseErr && <p className='text-red-500 my-2'> * {firebaseErr}</p>}
         <Btn onClick={handleSubmit}> {signUp ? 'Sign Up' : 'Sign In'}</Btn>
         {!signUp ? (
           <p className='text-sm text-center'>
