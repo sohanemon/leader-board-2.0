@@ -24,14 +24,14 @@ import useStore from '@/lib/store';
 export default function TableC() {
   const { memberData } = useStore();
   const TABLE_HEAD = [
-    'Position',
+    // 'Position',
     'Name',
     'Day Left',
     'Location',
     'School',
     'Edit',
   ];
-  const TABLE_ROWS = memberData;
+  const TABLE_ROWS = memberData.sort((a, b) => a.dayLeft - b.dayLeft);
   return (
     <Card className='w-full h-full mt-10 shadow-none box'>
       <CardHeader floated={false} className='rounded-none shadow-none'>
@@ -48,7 +48,7 @@ export default function TableC() {
             {/* <Button variant='outlined' color='blue-gray' size='sm'>
               view all
             </Button> */}
-            <ModalC>
+            {/* <ModalC>
               <Button
                 className='flex items-center gap-3'
                 color='blue'
@@ -56,7 +56,7 @@ export default function TableC() {
               >
                 <UserPlusIcon strokeWidth={2} className='w-4 h-4' /> Add member
               </Button>
-            </ModalC>
+            </ModalC> */}
           </div>
         </div>
       </CardHeader>
@@ -93,7 +93,7 @@ export default function TableC() {
 
                 return (
                   <tr key={name}>
-                    <td className={classes}>
+                    {/* <td className={classes}>
                       <Typography
                         variant='small'
                         color='blue-gray'
@@ -101,7 +101,7 @@ export default function TableC() {
                       >
                         {position}
                       </Typography>
-                    </td>
+                    </td> */}
                     <td className={classes}>
                       <div className='flex items-center gap-3'>
                         <Avatar src={img} alt={name} size='sm' />

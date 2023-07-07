@@ -58,7 +58,7 @@ export default function ModalC({
       <span onClick={handleOpen}>{children}</span>
       <Dialog open={open} handler={handleOpen}>
         <div className='flex items-center justify-between'>
-          <DialogHeader>Add new member</DialogHeader>
+          <DialogHeader>Update </DialogHeader>
           <XMarkIcon className='w-5 h-5 mr-3' onClick={handleOpen} />
         </div>
         <DialogBody divider>
